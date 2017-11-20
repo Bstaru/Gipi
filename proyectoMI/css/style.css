@@ -1,0 +1,229 @@
+/*--------LETRAS--------------------*/	
+
+	@font-face 
+	{
+	   font-family: "AvenirNextLTPro-Bold";
+	   src: url("../fonts/AvenirNextLTPro-Bold.otf");
+	}
+	@font-face 
+	{
+	   font-family: "AvenirNextLTPro-Regular";
+	   src: url("../fonts/AvenirNextLTPro-Regular.otf");
+	}
+/*	@font-face 
+	{
+	   font-family: "AvenirNextLTPro-Regular";
+	   src: url("../fonts/MAvenirNextLTPro-Regular.otf");
+	}*/
+
+/*--------RESET---------------------*/
+
+	h1,h2,h3,h4,h5, 
+	input, select, textarea,
+	span{
+		margin: 0;
+		padding: 0;
+	}
+	.elem-hide{
+		display: none;
+	}
+	.typ{
+		font-family: "AvenirNextLTPro-Regular";	
+	}
+	.typ-bold{
+		font-family: "AvenirNextLTPro-Bold";
+	}
+	/*INICIO*/
+	.inicio{
+		position: absolute;
+		z-index: 12;
+		top: 0;
+		left: 0;
+		height: 100vh;
+		width: 30vw;
+		background-color: #429EA6;
+	}
+	.op-title{
+		font-size: 5vh;
+		height: 30vh;
+		line-height: 30vh;
+		width:100%;
+		color: #fff;
+		text-align: center;
+	}
+	.opciones{
+		position: absolute;
+		z-index: 12;
+		top: 0;
+		right: 0;
+		height: 100vh;
+		width: 70vw;
+		background-color: #333;
+	}
+	.opcion{
+		height: 40vh;
+		background:#50808E;
+		width: 30%;
+		margin: 5%;
+		display: inline-block;
+
+		border-radius: 30px;
+	}
+	.img-op1{
+		background: url('../img/odd.jpg') no-repeat center center;
+		background-size: cover;
+	}
+	.op-name{
+		font-size: 3vh;
+		background-color: #fff;
+		color: #000;
+		text-align: center;
+	}
+	.pos-op-btn{
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+	}
+	.el-btn{
+		width: 100px;
+		margin: 0 auto;
+	}
+
+
+	/*JUEGO*/
+		.canvas{
+			z-index: 10;
+			position: absolute;
+			top: 0;
+			background: #000;
+		}
+		.data{
+			z-index: 15;
+			position: absolute;
+			top: 0;
+			background: rgba(0,0,0,0.5);
+			font-family: "AvenirNextLTPro-Regular";
+			height: 100vh;
+			width: 100vw;
+		}
+
+		.data2{
+			z-index: 15;
+			position: absolute;
+			top: 0;
+			font-family: "AvenirNextLTPro-Regular";
+			height: 100vh;
+			width: 100vw;
+		}
+		.gui{
+			z-index: 12;
+			position: absolute;
+			top: 5vh;
+			width: 100%;
+		}	
+		.pos-btn{
+			float: left;
+			margin-left: 5%;
+		}
+		.pos-score{
+			float: right;
+			padding-right: 5%;	
+			padding-left: 2%;	
+			background-color: rgba(0,0,0,0.5);
+			border-radius: 20px 0 0 20px;
+		}
+		.score{
+			color: #fff;
+			font-size: 5vh;
+		}
+		.menu-cont{
+			width: 40%;
+			height: 50vh;
+			text-align: center;
+			margin: 20vh auto;
+			background:#429EA6;
+			border-radius: 30px;
+		}
+
+		.menu-cont2{
+			width: 40%;
+			height: 50vh;
+			text-align: center;
+			margin: 20vh auto;
+			background:#429EA6;
+			border-radius: 30px;
+		}
+		.menu-inicial h1 ,
+		.menu-cont h1 {
+			height: 15vh;
+	    	line-height: 15vh;
+		}	
+		.menu{
+		}
+		.cont-config{
+			width: 50%;
+			margin: 0 auto;
+		}
+		.nombre{
+			width: 100%;
+		}
+		.nombre label, .nombre input{
+			display: inline-block;
+		}
+		.nombre input{
+			
+		}
+		.save{
+			width: 30%;
+		}
+
+
+	/*BOTONES*/
+		.botones{
+			width: 30%;
+			margin: 0 auto;
+		}
+		.btn-menu{
+			border-radius: 20px;
+			border: none;
+			font-size: 2.4vh;
+			margin-bottom: 5%;
+			padding: 5%;
+			background-color: #153B50;
+			color: #fff;
+			cursor: pointer;
+			}
+			.btn-menu:hover{
+				background-color: #1F5A7A;
+			}
+
+		.btn-gui{
+			border-radius: 20px;
+			border: none;
+			font-size: 3vh;
+			margin-bottom: 5%;
+			padding: 8px;
+			background-color: #153B50;
+			color: #fff;
+			cursor: pointer;
+			width: inherit;
+			}
+			.btn-gui:hover{
+				background-color: #1F5A7A;
+			}
+
+		.btn-op{
+			border-radius: 20px;
+			border: none;
+			font-size: 3vh;
+			margin-bottom: 5%;
+			padding: 8px;
+			background-color: #153B50;
+			color: #fff;
+			cursor: pointer;
+			width: inherit;
+		}
+		.btn-op:hover{
+			background-color: #1F5A7A;
+		}
+	

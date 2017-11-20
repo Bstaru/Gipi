@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Proyecto</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--Librerias CSS-->
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/sweet-alert.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css"/>
+
+	<!--Estilos mios-->	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Librerias JS -->
+
+	<script type="text/javascript" src = "js/libs/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src = "js/libs/three/three.js"></script>
+	<script type="text/javascript" src = "js/libs/three/MTLLoader.js"></script>
+	<script type="text/javascript" src = "js/libs/three/OBJLoader.js"></script>	
+	<script type="text/javascript" src = "js/libs/bootstrap.js"></script>
+	<script type="text/javascript" src = "js/libs/sweet-alert.min.js"></script>
+	<script type="text/javascript" src = "js/libs/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src = "js/libs/DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script> 
+
+	<script type="text/javascript" src = "js/funciones.js"></script>
+	<script type="text/javascript" src = "js/gui.js"></script>
+
+</head>
+
+<body style="position: relative;">	
+		
+	<div class="canvas">
+		<div id="scene-section"></div>
+	</div>
+
+	<div class="gui">
+		<div class="pos-btn">
+			<div class="btn-gui" id="detener">
+				Detener <i class="pause icon" style="display: inline-block;"></i>
+			</div>
+		</div>
+
+		<div class="pos-score">
+			<div class="typ">
+				<label class="score">
+					Score: <span id="score">65656</span>
+				</label>
+			</div>
+		</div>	
+
+	</div>
+	
+	<div class="elem-hide data" id="menu">
+		<div class="menu-cont">
+			<h1 class="typ-bold" style="color: #fff;">Nombre del juego</h1>
+			<div class="menu">				
+				<div class="botones">
+					<div class="typ btn-menu pause" id="reaunadar">Reanuadar</div>
+					<div class="typ btn-menu stop">Nuevo</div>
+					<div class="typ btn-menu play" id="menu_inicial">Menú</div>
+					<div class="typ btn-menu config">Configuración</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+
+	<div class="elem-hide configiracion data2">
+		<div class="menu-cont2">
+			<div class="cont-config">
+				<div class="nombre">
+					<label>Nombre:</label>
+					<input type="text" name="nombre">
+				</div>
+				<div class="guardar typ btn-menu save">Guardar</div>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+</html>
