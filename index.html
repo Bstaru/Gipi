@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Gipi</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Librerias CSS-->
+	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	    <link rel="stylesheet" type="text/css" href="css/icon.css">
+	    <link rel="stylesheet" type="text/css" href="css/animate.css">
+	    <link rel="stylesheet" type="text/css" href="css/sweet-alert.css">
+	    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+	    <link rel="stylesheet" type="text/css" href="js/libs/DataTables/datatables.css"/>
+	    <link rel="stylesheet" type="text/css" href="css/iziModal.min.css"/>
+
+	<!--Estilos mios-->	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Librerias JS -->
+		<script type="text/javascript" src = "js/libs/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src = "js/libs/three/three.js"></script>
+		<script type="text/javascript" src = "js/libs/three/MTLLoader.js"></script>
+		<script type="text/javascript" src = "js/libs/three/OBJLoader.js"></script>	
+		<script type="text/javascript" src = "js/libs/bootstrap.js"></script>
+		<script type="text/javascript" src = "js/libs/sweet-alert.min.js"></script>
+		<script type="text/javascript" src = "js/libs/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src = "js/libs/DataTables/datatables.min.js"></script>
+		<script type="text/javascript" src = "js/libs/iziModal.min.js"></script> 
+
+</head>
+
+<body style="position: relative; overflow-y:hidden;">	
+	
+	<div id="msg1"></div>
+	<div id="msg2"></div>
+	<div id="msg3"></div>
+	<div id="msg4"></div>
+	<div id="msg5"></div>
+
+	<div id="config" class="elem-hide typ modales">
+		<br>
+			<div class="typ typ-white form-group">
+			  <label for="nkn_up">Cambiar nickname:</label>
+			  <input type="text" class="form-control" id="nkn_up">
+			</div>
+		<br>	
+			<div class="typ typ-white form-group">
+			  <label for="usr_up">Cambiar correo:</label>
+			  <input type="text" class="form-control" id="usr_up">
+			</div>
+		<br>
+			<div class="typ typ-white form-group">
+			  <label for="pwd_up">Cambiar contra:</label>
+			  <input type="password" class="form-control" id="pwd_up">
+			</div>
+		<div class="botones">
+			<div class="typ btn-menu text-center" id="changeData">Cambiar</div>
+		</div>
+	</div>
+	<div class="inicio">
+		<div class="menu-inicial text-center">
+
+			<div class="loguito">
+				<img src="img/logo.png" class="img-responsive">
+			</div>	
+
+			<div class="animated" id="frms_inicio">		
+				
+				<div class="login typ-white animated " id="form-login">
+					<div class="typ form-group">
+					  <label for="usr">Correo:</label>
+					  <input type="text" class="form-control" id="usr">
+					</div>
+					<div class="typ form-group">
+					  <label for="pwd">Contraseña:</label>
+					  <input type="password" class="form-control" id="pwd">
+					</div>
+					<div class="botones">
+						<div class="typ btn-menu login" id="login">Iniciar sesión</div>
+						<br>
+					</div>
+					<div class="botones">
+						<div class="typ regis" id="Regis">Registrarse</div>
+					</div>
+
+					<!-- <div class="botones">
+						<div class="typ btn-menu login" id="loginFB" onclick="Request()">Iniciar con FB</div>
+						<br>
+					</div> -->
+				</div>
+
+				<div class="singup typ-white elem-hide animated" id="form-new">
+					<div class="typ form-group">
+					  <label for="nkn">Nickname:</label>
+					  <input type="text" class="form-control" id="nkn">
+					</div>
+					<div class="typ form-group">
+					  <label for="usr_n">Correo:</label>
+					  <input type="text" class="form-control" id="usr_n">
+					</div>
+					<div class="typ form-group">
+					  <label for="pwd_n">Contraseña:</label>
+					  <input type="password" class="form-control" id="pwd_n">
+					</div>
+
+					<div class="botones">
+						<div class="typ btn-menu singup" id="singup">Registrarse</div>
+					</div>
+					<div class="typ regis" id="Volver">Volver</div>
+				</div>
+
+			</div>
+			<div class="elem-hide animated" id="menu_inicio">
+				<h3 class="typ typ-white">Hola <span id="user_name">kkk</span></h3><br>
+				<div class="botones">
+					<div class="typ btn-menu" id="Canciones">Canciones</div>
+					<div class="typ btn-menu" id="Opciones">Opciones</div>
+					<div class="typ btn-menu" id="logout">Cerrar sesión</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="elem-hide opciones text-center">
+
+		<div class="typ-bold op-title">SELECCIONA UNA CANCIÓN</div>
+
+		<div id="Canciiones">
+		<!--  -->
+		</div>
+	</div>
+
+	<script type="text/javascript" src = "js/funciones.js"></script>
+	<script type="text/javascript" src = "js/gui.js"></script>
+	<script type="text/javascript" src = "js/inicio.js"></script>
+	<script type="text/javascript" src = "js/mifacebook.js"></script>
+</body>
+</html>
