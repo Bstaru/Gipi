@@ -14,10 +14,44 @@ $(document).ready(function() {
 	    width: 300,
         iconText: '<i class="game icon"></i>',
         transitionIn: 'fadeInDown',
-        transitionOut: 'fadeOutDown'
+        transitionOut: 'fadeOutDown',
+        // onClosed: function(){
+        //  	 msgGameOve.iziModal('open');
+        //  },
     });
 
     msgInicio.iziModal('open');
+
+
+    //COMPARTIR EN TWITTER
+	    function ShareTwi(score){
+		    // Opens a pop-up with twitter sharing dialog
+
+			var url = "http://unilocker.com.mx/gipi";
+			var text = "¡Hey! He jugado Gipi y mi puntaje es: " + score;
+			window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+	    }
+
+	    var msgGameOve = $("#msgGameover").iziModal({
+			title: 'FIN DEL JUEGO',
+		    headerColor: '#153B50',
+		    background:'#fff',
+		    zindex: 2000,
+		    padding: 20,
+		    width: 500,
+	        iconText: '<i class="game icon"></i>',
+	        transitionIn: 'fadeInDown',
+	        transitionOut: 'fadeOutDown',
+	         onOpened: function(){
+	         	$('#puntaje_final').text(
+	         		$('#score').text()
+	         		);
+	         },
+	    });    
+
+	    $("#shareTwit").on('click',function(){
+	    	ShareTwi($('#puntaje_final').text());
+	    });
 
     $("#Prueba").on('click',function(){
     	msgInicio.iziModal('close');
