@@ -76,7 +76,17 @@ $(document).ready(function() {
 
 
     $("#Canciones").on('click', function(){
-	 	 $('.opciones').removeClass('elem-hide');
+    	$('.ranking').addClass('elem-hide');
+    	$('.opciones').addClass('elem-hide');
+
+	 	$('.opciones').removeClass('elem-hide');
+	 });
+
+    $("#Rang").on('click', function(){
+    	$('.ranking').addClass('elem-hide');
+    	$('.opciones').addClass('elem-hide');
+    	
+	 	$('.ranking').removeClass('elem-hide');
 	 });
 
 	$("#JUGAR").on('click', function(){

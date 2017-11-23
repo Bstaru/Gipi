@@ -2,8 +2,34 @@ $(document).ready(function() {
 
 	var MTDS = new METODOS();
 
-	var user;
+    var spanish = {
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "No encontramos resultados",
+        "sEmptyTable": "No encontramos ningún registro",
+        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+        }
+	
+    var user;
 	var song;
+    var scores;
 
     var frmlogNew = $('#frms_inicio');
 	var frmMenu = $('#menu_inicio');
@@ -294,6 +320,67 @@ $(document).ready(function() {
 
     };
 
+    function s_score(song) {
+
+        var param = {action: "selScore", song:song };
+       
+        $.ajax({
+            type: "POST",
+            url: servicio,
+            data: param,
+            dataType: "json",
+            async: true,
+
+            success: function (response) {
+                var arr = new Array();
+                scores = response;
+
+                $.each(response, function (indx, obj) {
+                    var OBJ = [indx+1,obj.Nickname, obj.score];
+                    arr.push(OBJ);
+                });
+
+                if (song == 1) {
+                    var table = $('#tbl_Ranking1').DataTable({
+                        language: spanish,
+                        searching: true,
+                        destroy: true,
+                        info: false,
+                        pageLength: 5,
+                        paging: true,
+                        dom: 'Bfrtip',
+                        buttons: [],
+                        responsive: true,
+                        data: arr,
+                        columns: [{ 'folio': 'folio' },{ 'folio': 'folio' }, { 'fecha': 'fecha' }],
+                    });
+                }
+
+                if (song == 2) {
+                    var table = $('#tbl_Ranking2').DataTable({
+                        language: spanish,
+                        searching: true,
+                        destroy: true,
+                        info: false,
+                        pageLength: 5,
+                        paging: true,
+                        dom: 'Bfrtip',
+                        buttons: [],
+                        responsive: true,
+                        data: arr,
+                        columns: [{ 'folio': 'folio' },{ 'folio': 'folio' }, { 'fecha': 'fecha' }],
+                    });
+                }
+
+            },
+
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+    };
+
     $('#login').on('click', function () {
         var correo = $('#usr').val();
         var contra = $('#pwd').val();
@@ -366,6 +453,12 @@ $(document).ready(function() {
 		else{
 		}
     });
+
+    $("#Rang").on('click', function(){
+        s_score(1);   
+        s_score(2);   
+    });
+
 	$("#Canciones").on('click', function(){		
 		s_songs(function () {
 			$.each(song, function (indx, obj) {

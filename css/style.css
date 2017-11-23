@@ -84,14 +84,14 @@
 				color: #fff;
 				text-align: center;
 			}
-			.opciones{
+			.opciones, .ranking{
 				position: absolute;
 				z-index: 12;
 				top: 0;
 				right: 0;
 				height: 100vh;
 				width: 70vw;
-				background-color: #333;
+				background-color: #457792;
 			}
 			.opcion{
 				height: 40vh;
@@ -101,30 +101,46 @@
 				display: inline-block;
 
 				border-radius: 30px;
+				}
+				.img-op1{
+					background: url('../img/kokobop.jpg') no-repeat center center;
+					background-size: cover;
+				}
+				.img-op0{
+					background: url('../img/power.jpg') no-repeat center center;
+					background-size: cover;
+				}
+				.op-name{
+					font-size: 3vh;
+					background-color: #429EA6;
+					color: #fff;
+					text-align: center;
+				}
+				.pos-op-btn{
+					position: absolute;
+					bottom: 10px;
+					width: 100%;
+				}
+				.el-btn{
+					width: 100px;
+					margin: 0 auto;
+					}
+
+			.tbl{
+				width: 70%;
+				margin: 0 auto;
 			}
-			.img-op1{
-				background: url('../img/kokobop.jpg') no-repeat center center;
-				background-size: cover;
+			.tbl table{
+				font-family: "AvenirNextLTPro-Regular";
 			}
-			.img-op0{
-				background: url('../img/power.jpg') no-repeat center center;
-				background-size: cover;
-			}
-			.op-name{
-				font-size: 3vh;
-				background-color: #429EA6;
-				color: #fff;
+
+			.tbl table th{
 				text-align: center;
 			}
-			.pos-op-btn{
-				position: absolute;
-				bottom: 10px;
-				width: 100%;
+			.dataTables_filter label{
+				color: #fff;
 			}
-			.el-btn{
-				width: 100px;
-				margin: 0 auto;
-		}
+
 
 
 	/*JUEGO*/

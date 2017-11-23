@@ -31,6 +31,9 @@
 	var delay = 0;
 	var delay2 = 0;
 
+	var minivan;
+	var posMini = -90;
+
 	//1 = -5, 2 = 0, 3 = -5, el arreglo es de 156
 
 	var notasPower = [5,5,5,5,0,0,-5,-5,5,5,5,5,0,0,5,5,5,-5,5,-5,
@@ -64,12 +67,10 @@
 					obj2.position.z = -155;
 
 					scene.add(object);
-					//scene.add(obj2);
 
 					objsPiso[0]= object;
-					//objsPiso[1]= obj2;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[0] = true;
 			});
@@ -93,24 +94,23 @@
 					scene.add(obj2);
 					scene.add(obj3);
 
+					//collisionObjects.push(object)			
+
+				isWorldReady[0] = true;
+			});
+
+			loadOBJWithMTL("assets/", "minivan.obj", "minivan.mtl", (object) => {
+					object.position.z = 100;
+					object.rotation.y = THREE.Math.degToRad(90);
+					object.name = "minivan";
+											
+					scene.add(object);
+					minivan = object;	
 
 					collisionObjects.push(object)			
 
 				isWorldReady[0] = true;
 			});
-
-			// loadOBJWithMTL("assets/", "minivan.obj", "minivan.mtl", (object) => {
-			// 		object.position.z = -50;
-			// 		object.rotation.y = THREE.Math.degToRad(90);
-			// 		object.name = "minivan";
-
-
-			// 		scene.add(object);
-
-			// 		collisionObjects.push(object)			
-
-			// 	isWorldReady[0] = true;
-			// });
 		
 		//DINAMICOS	
 			loadOBJWithMTL("assets/", "edificio01.obj", "edificio01_1.mtl", (object) => {
@@ -135,7 +135,7 @@
 					objsIzq[0]= object;
 					objsDer[0]= obj2;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[1] = true;
 			});
@@ -161,7 +161,7 @@
 					objsIzq[1]= object;
 					objsDer[1]= obj2;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[2] = true;
 			});
@@ -188,7 +188,7 @@
 					objsIzq[2]= object;
 					objsDer[2]= obj2;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[3] = true;
 			});
@@ -215,7 +215,7 @@
 					objsIzq[3]= obj2;
 					objsDer[3]= object;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[4] = true;
 			});
@@ -242,7 +242,7 @@
 					objsIzq[4]= object;
 					objsDer[4]= obj2;
 
-					collisionObjects.push(object)			
+					///collisionObjects.push(object)			
 
 				isWorldReady[5] = true;
 			});
@@ -269,7 +269,7 @@
 					objsIzq[5]= obj2;
 					objsDer[5]= object;
 
-					collisionObjects.push(object)			
+					//collisionObjects.push(object)			
 
 				isWorldReady[6] = true;
 			});
@@ -332,8 +332,7 @@
 					objsDer[8]= obj5;
 					objsDer[9]= obj6;
 
-				// 
-					collisionObjects.push(object)			
+				//collisionObjects.push(object)			
 
 				isWorldReady[1] = true;
 			});
@@ -692,6 +691,7 @@
 
 	
 	function render() {
+		//onWindowResize();
 		ren =  requestAnimationFrame(render);
 		deltaTime = clock.getDelta();
 		delay += 10 * deltaTime;
@@ -724,6 +724,8 @@
 		var yaw = 0;
 		var forward = 0;	
 
+	Mnie();
+	
 	//ANIMACION camaras	
 		//animaPap[recorPap].position.z = -70;
 		// posPap += 0.5;
@@ -820,8 +822,7 @@
 	}
 
 	function setupScene() {		
-		var visibleSize = { width: window.innerWidth ,
-						   height: window.innerHeight};
+		var visibleSize = { width: window.innerWidth ,   height: window.innerHeight};
 
 		clock = new THREE.Clock();		
 		scene = new THREE.Scene();
@@ -841,7 +842,7 @@
 		renderer = new THREE.WebGLRenderer( {precision: "mediump" } );
 		renderer.setClearColor(new THREE.Color(0x84bbd1));
 		renderer.setPixelRatio(visibleSize.width / visibleSize.height);
-		renderer.setSize(visibleSize.width - 5, visibleSize.height -10);
+		renderer.setSize(visibleSize.width - 5, visibleSize.height -10);    	
 
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMap.Type = THREE.BasicShadowMap;
@@ -857,23 +858,25 @@
 		directionalLight.shadow.camera.near = 0.1;
 		directionalLight.shadow.camera.far = 100;
 
-
-		// var grid = new THREE.GridHelper(50, 10, 0xffffff, 0xffffff);
-		// grid.position.y = -1;
-		// scene.add(grid);
-
 		$("#scene-section").append(renderer.domElement);
+		window.addEventListener( 'resize', onWindowResize, false );
+	}
+
+	function onWindowResize() {
+	    camera.aspect = window.innerWidth / window.innerHeight;
+	    camera.updateProjectionMatrix();
+	    renderer.setSize( window.innerWidth-5, window.innerHeight-5);
+	    render();
 	}
 
 	function Clonar(indice){
 		clon[indice] = animaPap[indice].clone();
 	}
 	var tamanio = notasPower.length;
-	//console.log(tamanio);
-	function MostrarClon(){
-		console.log(tamanio + ' - ' + animaPapClone.length);
-		if (animaPapClone.length < tamanio) {
-			setTimeout(function(){ 
+
+	function MostrarClon(){		
+		setTimeout(function(){ 
+			if (animaPapClone.length < tamanio) {
 				for(var i = 0; i < 8; i++){
 					Clonar(i);
 				}
@@ -881,8 +884,19 @@
 				animaPapClone.push(clon);
 				clon = [];
 				//console.log(animaPapClone);
-			}, 
-			500);
-		}
+			}
+		}, 
+		500);
+	}
+
+	function Mnie(){
+		setTimeout(function(){
+			posMini += 20 * deltaTime;
+			minivan.position.z = posMini;	
+		},5000);	
+
+		// if (minivan.position.z > 10) {
+		// 	scene.remove(minivan);
+		// }
 	}
 

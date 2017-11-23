@@ -58,15 +58,15 @@ $(document).ready(function() {
 		source.src = 'assets/power.mp3';
 		audio.appendChild(source);
 
+    var stop = false;
+
     $("#Prueba").on('click',function(){
     	msgInicio.iziModal('close');
-    	render();
-
-		
-		// setTimeout(function(){ 
-		// 	audio.play();
-		// 	}, 500);
-		audio.play();
+    	render();		
+		setTimeout(function(){ 
+			audio.play();
+			}, 200);
+		//audio.play();
     });
 
 	//BOTONES DE MENU Y ESO
@@ -75,18 +75,25 @@ $(document).ready(function() {
 			    e.preventDefault()
 			    cancelAnimationFrame(ren);
 		 		mov = 0;
+
+		 		if (audio.paused == false) {
+	                audio.pause();
+	            }
 			  }
 			  if (e.keyCode === 27) {
 			    e.preventDefault()
 			    render();
 		 		mov=20;
+		 		audio.play();
 			  }
 		 });
 		 $("#detener").on('click', function(){
 		 	cancelAnimationFrame(ren);
 		 	mov = 0;
-		 	if(audio.isPlaying) audio.pause();
-         	else audio.play();
+		 	
+		 	if (audio.paused == false) {
+                audio.pause();
+            }
 		 });
 		 $("#reaunadar").on('click', function(){
 		 	render();
@@ -94,5 +101,13 @@ $(document).ready(function() {
 		 	audio.play();
 		 });
 
+
+		 $("#denuevo").on('click', function(){
+		 	location.reload();
+		 });
+
+		 $("#menu_inicial").on('click', function(){
+		 	window.location.href = "index.html";
+		 });
 
 });
