@@ -53,9 +53,20 @@ $(document).ready(function() {
 	    	ShareTwi($('#puntaje_final').text());
 	    });
 
+	var audio = document.createElement('audio');
+	var source = document.createElement('source');
+		source.src = 'assets/power.mp3';
+		audio.appendChild(source);
+
     $("#Prueba").on('click',function(){
     	msgInicio.iziModal('close');
     	render();
+
+		
+		// setTimeout(function(){ 
+		// 	audio.play();
+		// 	}, 500);
+		audio.play();
     });
 
 	//BOTONES DE MENU Y ESO
@@ -74,10 +85,13 @@ $(document).ready(function() {
 		 $("#detener").on('click', function(){
 		 	cancelAnimationFrame(ren);
 		 	mov = 0;
+		 	if(audio.isPlaying) audio.pause();
+         	else audio.play();
 		 });
 		 $("#reaunadar").on('click', function(){
 		 	render();
 		 	mov=20;
+		 	audio.play();
 		 });
 
 

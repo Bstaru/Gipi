@@ -19,6 +19,8 @@
 	var objsPiso = [];
 
 	var animaPap = [];
+	var animaPapClone = new Array();
+	var clon = [];
 	var recorPap = 0;
 	var posPap = -20;
 	var clonado;
@@ -31,14 +33,13 @@
 
 	//1 = -5, 2 = 0, 3 = -5, el arreglo es de 156
 
-	var notasPower = [3,3,3,3,2,2,1,1,3,3,3,3,2,2,3,3,3,1,3,1,
-	1,1,1,1,3,3,3,2,1,3,3,2,1,1,1,1,2,2,3,3,1,3,3,3,3,1,2,
-	3,3,3,3,3,2,2,1,1,1,1,1,2,3,2,3,3,3,2,2,2,3,3,3,2,3,3,
-	1,1,1,3,3,3,2,2,3,3,3,3,2,1,3,1,3,1,1,3,2,2,2,1,1,3,1,
-	3,1,3,1,2,3,2,3,3,3,2,3,3,2,1,1,3,3,3,2,2,2,2,1,3,1,3,
-	1,3,1,3,2,3,2,3,3,3,3,2,2,2,2,3,3,1,1,2,2,3,3,2,3,1,1,3]
+	var notasPower = [5,5,5,5,0,0,-5,-5,5,5,5,5,0,0,5,5,5,-5,5,-5,
+		-5,-5,-5,-5,5,5,5,0,-5,5,5,0,-5,-5,-5,-5,0,0,5,5,-5,5,5,5,5,-5,0,
+		5,5,5,5,5,0,0,-5,-5,-5,-5,-5,0,5,0,5,5,5,0,0,0,5,5,5,0,5,5,
+		-5,-5,-5,5,5,5,0,0,5,5,5,5,0,-5,5,-5,5,-5,-5,5,0,0,0,-5,-5,5,-5,
+		5,-5,5,-5,0,5,0,5,5,5,0,5,5,0,-5,-5,5,5,5,0,0,0,0,-5,5,-5,5,
+		-5,5,-5,5,0,5,0,5,5,5,5,0,0,0,0,5,5,-5,-5,0,0,5,5,0,5,-5,-5,5]
 	var recorNotas = 0;
-	var posNotas = [];
 
 	var rayCaster; 
 	var collisionObjects = []; 
@@ -47,24 +48,6 @@
 	$(document).ready(function() {
 
 		setupScene();
-
-		for (var i = 0; i < notasPower.length ; i++) {
-
-			if (notasPower[i] == 1) {
-				//console.log('Es 1');
-				posNotas[i] = -5
-			}
-
-			if (notasPower[i] == 2) {
-				//console.log('Es 2');
-				posNotas[i] = 0
-			}
-
-			if (notasPower[i] == 3) {
-				//console.log('Es 3');
-				posNotas[i] = 5
-			}
-		}
 
 		rayCaster = new THREE.Raycaster();
 
@@ -743,40 +726,41 @@
 
 	//ANIMACION camaras	
 		//animaPap[recorPap].position.z = -70;
-		posPap += 0.5;
+		// posPap += 0.5;
 
-		if (delay2 > 1) {
-			if (recorPap != 8) {
-				animaPap[7].position.z = 100;
-			}
-			animaPap[recorPap].position.z = posPap;					
+		// if (delay2 > 1) {
+		// 	if (recorPap != 8) {
+		// 		animaPap[7].position.z = 100;
+		// 	}
+		// 	animaPap[recorPap].position.z = posPap;					
 
-			if (recorPap > 0) {
-				animaPap[recorPap - 1].position.z = 100;
-			}
-			else{				
-				//animaPap[0].position.z = 100;
-			}
+		// 	if (recorPap > 0) {
+		// 		animaPap[recorPap - 1].position.z = 100;
+		// 	}
+		// 	else{				
+		// 		//animaPap[0].position.z = 100;
+		// 	}
 
-			recorPap += 1;
-			if (recorPap==8) {
-				recorPap = 0;
-			}	
+		// 	recorPap += 1;
+		// 	if (recorPap==8) {
+		// 		recorPap = 0;
+		// 	}	
 
-			delay2 = 0;
-		}	
-		if (posPap == 10) {
-			posPap = -75;
-		}			
+		// 	delay2 = 0;
+		// }	
+		// if (posPap == 10) {
+		// 	posPap = -75;
+		// }			
 
-		animaPap[recorPap].position.x = 5;
-		//var obj2 = object.clone();
+		// animaPap[recorPap].position.x = 5;
 
-		for (var i = 0 ; i < 5; i++) {
-			var otroClone = clonado+i
-			otroClone
+		// for (var i = 0 ; i < 5; i++) {
+		// 	// i = animaPap[recorPap].clone();
+		// 	// i.position.x = posNotas[i];
+		// 	// scene.add(i);
+		// }
 
-		}
+	MostrarClon();
 
 	//ANIMACION MONO	
 		var per = animaPer.length;
@@ -873,12 +857,32 @@
 		directionalLight.shadow.camera.near = 0.1;
 		directionalLight.shadow.camera.far = 100;
 
-		
 
 		// var grid = new THREE.GridHelper(50, 10, 0xffffff, 0xffffff);
 		// grid.position.y = -1;
 		// scene.add(grid);
 
 		$("#scene-section").append(renderer.domElement);
+	}
+
+	function Clonar(indice){
+		clon[indice] = animaPap[indice].clone();
+	}
+	var tamanio = notasPower.length;
+	//console.log(tamanio);
+	function MostrarClon(){
+		console.log(tamanio + ' - ' + animaPapClone.length);
+		if (animaPapClone.length < tamanio) {
+			setTimeout(function(){ 
+				for(var i = 0; i < 8; i++){
+					Clonar(i);
+				}
+				
+				animaPapClone.push(clon);
+				clon = [];
+				//console.log(animaPapClone);
+			}, 
+			500);
+		}
 	}
 
