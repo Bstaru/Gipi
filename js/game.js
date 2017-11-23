@@ -805,12 +805,21 @@
 		if (isWorldReady[0] && isWorldReady[1] && isWorldReady[2]) {
 
 			for(var i = 0; i < camera.rays.length; i++){
+				
 				rayCaster.set(camera.position, camera.rays[i]);
-
 				var collision = rayCaster.intersectObjects(collisionObjects,true);
 				
 				if(collision.length > 0 && collision[0].distance <1){
-					//console.log('yeee');
+					for (var j = 0; j < collisionObjectsNames.length; j++) {
+						var obj = scene.getObjectByName(collisionObjectsNames[j]);
+						if (collision[0].object.parent.name == obj.name) {
+							scene.remove(obj);
+							var pos = collisionObjects.indexOf(obj);
+							collisionObjects.splice(pos, 1);
+							pos = collisionObjectsNames.indexOf(obj.name);
+							collisionObjectsNames.splice(pos, 1);
+						}
+					}
 				}
 			}			
 			camera.rotation.y += yaw * deltaTime;
