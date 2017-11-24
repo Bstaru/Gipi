@@ -4,17 +4,19 @@ $(document).ready(function() {
 
 	var songID = MTDS.GET_URL_PARAM('id');
 
-
+	var SeGuardo;
 	var msgInicio = $("#msgInicio").iziModal({
 		title: '¿LISTO?',
+		subtitle:'Teclas',
 	    headerColor: '#153B50',
 	    background:'#fff',
 	    zindex: 2000,
 	    padding: 20,
-	    width: 300,
+	    width: 500,
         iconText: '<i class="game icon"></i>',
         transitionIn: 'fadeInDown',
         transitionOut: 'fadeOutDown',
+        closeOnEscape: false,
         // onClosed: function(){
         //  	 msgGameOve.iziModal('open');
         //  },
@@ -53,19 +55,20 @@ $(document).ready(function() {
 	    	ShareTwi($('#puntaje_final').text());
 	    });
 
-	var audio = document.createElement('audio');
-	var source = document.createElement('source');
-		source.src = 'assets/power.mp3';
-		audio.appendChild(source);
+	//VARIABLES AUDIO    
+		var audio = document.createElement('audio');
+		var source = document.createElement('source');
+			source.src = 'assets/power.mp3';
+			audio.appendChild(source);
 
-    var stop = false;
+	    var stop = false;
 
     $("#Prueba").on('click',function(){
     	msgInicio.iziModal('close');
     	render();		
-		setTimeout(function(){ 
-			audio.play();
-			}, 200);
+		// setTimeout(function(){ 
+		// 	audio.play();
+		// 	}, 200);
 		//audio.play();
     });
 
@@ -80,12 +83,12 @@ $(document).ready(function() {
 	                audio.pause();
 	            }
 			  }
-			  if (e.keyCode === 27) {
-			    e.preventDefault()
-			    render();
-		 		mov=20;
-		 		audio.play();
-			  }
+			  // if (e.keyCode === 27) {
+			  //   e.preventDefault()
+			  //   render();
+		 		// mov=20;
+		 		// audio.play();
+			  // }
 		 });
 		 $("#detener").on('click', function(){
 		 	cancelAnimationFrame(ren);
@@ -109,5 +112,40 @@ $(document).ready(function() {
 		 $("#menu_inicial").on('click', function(){
 		 	window.location.href = "index.html";
 		 });
+
+	//servicios
+	
+	function i_score(score,user,song) {
+
+        var param = {action: "selScore", score:score, user:user, song:song };
+       
+        $.ajax({
+            type: "POST",
+            url: servicio,
+            data: param,
+            async: true,
+
+            success: function (response) {
+            	btnSehizo = $("#SeGuardoScore").iziModal({
+			        title: "¡Listo!",
+			        subtitle: response,
+			        iconText: '<i class="checkmark icon"></i>',
+			        headerColor: '#4cae4c',
+			        width: 600,
+			        timeout: 5000,
+			        timeoutProgressbar: true,
+			        transitionIn: 'fadeInDown',
+			        transitionOut: 'fadeOutDown',
+			        pauseOnHover: true
+			    });
+			    btnSehizo.iziModal('open');
+            },
+
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+    };	 
 
 });

@@ -126,7 +126,7 @@
 		if (!$result) {
 			echo "Problema al hacer un query: " . $mysqli->error;								
 		} else {
-			echo "Todo salio bien";
+			echo "Tu Score ha sido guardado";
 		}
 		mysqli_close($mysqli);
 		}	

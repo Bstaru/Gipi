@@ -452,6 +452,9 @@ $(document).ready(function() {
 		}
 		else{
 		}
+
+        $('.ranking').addClass('elem-hide');
+        $('.opciones').addClass('elem-hide');
     });
 
     $("#Rang").on('click', function(){
