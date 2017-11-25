@@ -21,10 +21,10 @@
 
 // CONEXIÓN BASE DE DATOS
 	function connect() {
-		$databasehost = "localhost"; //160.153.62.69
-		$databasename = "gipi"; //gipi01
-		$databaseuser = "root"; //bstaru95
-		$databasepass = "shineekey91"; //uM7DGtE&j2#eVC
+		$databasehost = "160.153.62.69"; //160.153.62.69
+		$databasename = "gipi01"; //gipi01
+		$databaseuser = "bstaru95"; //bstaru95
+		$databasepass = "uM7DGtE&j2#eVC"; //uM7DGtE&j2#eVC
 
 		$mysqli = new mysqli($databasehost, $databaseuser, $databasepass, $databasename);
 		if ($mysqli->connect_errno) {

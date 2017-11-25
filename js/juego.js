@@ -27,8 +27,6 @@ $(document).ready(function() {
 
     //COMPARTIR EN TWITTER
 	    function ShareTwi(score){
-		    // Opens a pop-up with twitter sharing dialog
-
 			var url = "http://unilocker.com.mx/gipi";
 			var text = "¡Hey! He jugado Gipi y mi puntaje es: " + score;
 			window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
@@ -56,20 +54,16 @@ $(document).ready(function() {
 	    });
 
 	//VARIABLES AUDIO    
-		var audio = document.createElement('audio');
-		var source = document.createElement('source');
-			source.src = 'assets/power.mp3';
-			audio.appendChild(source);
-
-	    var stop = false;
+		
 
     $("#Prueba").on('click',function(){
     	msgInicio.iziModal('close');
     	render();		
-		// setTimeout(function(){ 
-		// 	audio.play();
-		// 	}, 200);
+		setTimeout(function(){ 
+			audio.play();
+			}, 200);
 		//audio.play();
+
     });
 
 	//BOTONES DE MENU Y ESO
@@ -114,10 +108,23 @@ $(document).ready(function() {
 		 });
 
 	//servicios
+	var objSess = JSON.parse(sessionStorage.getItem("UserSession"));
+
+	$('#denuevo_pnt').on('click',function(){
+		var si = objSess.id;
+		if (si == null || si == 0 || si == "") {
+			i_score($('#puntaje_final').text(),1,1);
+		}
+		else{
+			i_score($('#puntaje_final').text(),si,1);
+		}
+		
+		//location.reload();
+	})
 	
 	function i_score(score,user,song) {
 
-        var param = {action: "selScore", score:score, user:user, song:song };
+        var param = {action: "insScore", score:score, user:user, song:song };
        
         $.ajax({
             type: "POST",
@@ -136,7 +143,11 @@ $(document).ready(function() {
 			        timeoutProgressbar: true,
 			        transitionIn: 'fadeInDown',
 			        transitionOut: 'fadeOutDown',
-			        pauseOnHover: true
+			        pauseOnHover: true,
+			         onClosed: function(){
+			         	 location.reload();
+			         	   $("#menu2").removeClass('elem-hide');
+			         },
 			    });
 			    btnSehizo.iziModal('open');
             },
@@ -146,6 +157,9 @@ $(document).ready(function() {
             }
         });
 
-    };	 
+    };	
+
+
 
 });
+

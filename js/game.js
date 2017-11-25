@@ -1,3 +1,10 @@
+	var audio = document.createElement('audio');
+		var source = document.createElement('source');
+			source.src = 'assets/power.mp3';
+			audio.appendChild(source);
+
+	    var stop = false;
+
 	var scene;
 	var camera;
 	var renderer;
@@ -8,11 +15,7 @@
 	var keys = {};
 
 	// PARTICULAAA
-		var materialPL = new THREE.PointsMaterial({
-			color: 0xffffff
-		});
-		var geometryPL = new THREE.Geometry();
-		var xp, yp, zp;
+	var particles;
 
 	var ren;
 
@@ -26,17 +29,22 @@
 	var objsPiso = [];
 
 	var animaPap = [];
-	//KAREN
+	
 		var paparazzis= new Array();
 		var contNP= 0; //Cuenta en que parte del arreglo de notasPower va
 		var contPp= 0; //Cuenta cuantos papparazzis hay en escena
-		var posZ= [-70, -70, -70, -70, -70, -70, -70, -70, -70, -70];
+		var clockAnim;
+		var tAnim=0;
+		var clockPrinc;
+		var tPrinc=0;
 		var time= 0;
 		var clockP;
-		var clockJuego;
 		var timeJuego=0;
 		var third;
-	//------
+		var punt=0;
+
+		var puntaje = 0;
+	
 	var animaPapClone = new Array();
 	var clon = [];
 	var recorPap = 0;
@@ -284,7 +292,6 @@
 			});
 
 			loadOBJWithMTL("assets/", "arbol.obj", "arbol.mtl", (object) => {
-				// 
 					object.position.z = -20;
 					object.position.x = -13;
 					object.name = "arbol_01";
@@ -341,8 +348,6 @@
 			spotLight.castShadow = true;
 			spotLight.shadow.camera.near = 0.1;
 			spotLight.shadow.camera.far = 100;
-			// scene.add(spotlight.target);
-			// scene.add(spotlight);
 
 			loadOBJWithMTL("assets/cameraRun/", "cam_1.obj", "cam_1.mtl", (object) => {
 				object.position.z =90;
@@ -352,31 +357,9 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].receiveShadow = true;
 
-				object.add(spotLight);
-
-				//scene.add(object);
-
 				animaPap[0] = object;
 
-				//collisionObjects.push(object);
-
-				isWorldReady[2] = true;
-			});
-
-			loadOBJWithMTL("assets/cameraRun/", "cam_2.obj", "cam_2.mtl", (object) => {
-				object.position.z =90;
-				object.scale.x = 0.55;
-				object.scale.y = 0.55;
-				object.scale.z = 0.55;
-
-				object.children[0].receiveShadow = true;
-				object.children[0].receiveShadow = true;
-
-				//scene.add(object);
-
-				//animaPap[1] = object;
-
-				//collisionObjects.push(object);
+				collisionObjects.push(object);
 
 				isWorldReady[2] = true;
 			});
@@ -389,31 +372,13 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].receiveShadow = true;
 
-				//scene.add(object);
-
 				animaPap[1] = object;
 
-				//collisionObjects.push(object);
+				collisionObjects.push(object);
 
 				isWorldReady[2] = true;
 			});
 	
-			loadOBJWithMTL("assets/cameraRun/", "cam_4.obj", "cam_4.mtl", (object) => {
-				object.position.z =90;
-				object.scale.x = 0.55;
-				object.scale.y = 0.55;
-				object.scale.z = 0.55;
-				object.children[0].receiveShadow = true;
-				object.children[0].receiveShadow = true;
-
-				//scene.add(object);
-
-				//animaPap[3] = object;
-
-				//collisionObjects.push(object);
-
-				isWorldReady[2] = true;
-			});
 
 			loadOBJWithMTL("assets/cameraRun/", "cam_5.obj", "cam_5.mtl", (object) => {
 				object.position.z =90;
@@ -423,29 +388,9 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].receiveShadow = true;
 
-				object.add(spotLight);
-
-				//scene.add(object);
 				animaPap[2] = object;
 
-				//collisionObjects.push(object);
-
-				isWorldReady[2] = true;
-			});
-
-			loadOBJWithMTL("assets/cameraRun/", "cam_6.obj", "cam_6.mtl", (object) => {
-				object.position.z =90;
-				object.scale.x = 0.55;
-				object.scale.y = 0.55;
-				object.scale.z = 0.55;
-				object.children[0].receiveShadow = true;
-				object.children[0].receiveShadow = true;
-
-				//scene.add(object);
-
-				//animaPap[5] = object;
-
-				//collisionObjects.push(object);
+				collisionObjects.push(object);
 
 				isWorldReady[2] = true;
 			});
@@ -457,32 +402,13 @@
 				object.scale.z = 0.55;
 				object.children[0].receiveShadow = true;
 				object.children[0].receiveShadow = true;
-
-				//scene.add(object);
-
 				animaPap[3] = object;
 
-				//collisionObjects.push(object);
+				collisionObjects.push(object);
 
 				isWorldReady[2] = true;
 			});
 
-			loadOBJWithMTL("assets/cameraRun/", "cam_8.obj", "cam_8.mtl", (object) => {
-				object.position.z =90;
-				object.scale.x = 0.55;
-				object.scale.y = 0.55;
-				object.scale.z = 0.55;
-				object.children[0].receiveShadow = true;
-				object.children[0].receiveShadow = true;
-
-				//scene.add(object);
-
-				//animaPap[3] = object;
-
-				//collisionObjects.push(object);
-
-				isWorldReady[2] = true;
-			});
 		//PERSONAJE	
 		
 			loadOBJWithMTL("assets/cicloRun_obj/", "run_1.obj", "run_1.mtl", (object) => {
@@ -497,8 +423,15 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
+
 				scene.add(object);
 				animaPer[0] = object;
+				animaPer.currentAnim= 0;
+				animaPer.PosX= 0;
 
 				//collisionObjects.push(object);
 
@@ -517,9 +450,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible=false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[1] = object;
 				
 				//collisionObjects.push(object);
@@ -539,9 +474,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[2] = object;
 
 				//collisionObjects.push(object);
@@ -561,9 +498,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[3] = object;
 
 				//collisionObjects.push(object);
@@ -583,9 +522,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[4] = object;
 
 				//collisionObjects.push(object);
@@ -605,9 +546,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[5] = object;
 
 				//collisionObjects.push(object);
@@ -627,9 +570,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[6] = object;
 
 				//collisionObjects.push(object);
@@ -649,9 +594,11 @@
 				object.children[0].receiveShadow = true;
 				object.children[0].castShadow = true;
 
-				//object.visible = false;
+				object.rays = [
+					new THREE.Vector3(0, 0, 1),
+					new THREE.Vector3(0, 0, -1)
+				];
 
-				scene.add(object);
 				animaPer[7] = object;
 
 				//collisionObjects.push(object);
@@ -661,27 +608,11 @@
 
 
 		//render();
+		drawParticles();
 
-		//--KAREN--
-			// for(var i= 0; i<10; i++){
-			// 	//var arr= new Array();
-			// 	for(var y=0; y< animaPap.length; y++){
-			// 		var model= animaPap[y];
-			// 		console.log(model);
-			// 	}
-			// 	//paparazzis[i]= arr;
-			// }
-			console.log(animaPap);
-			console.log(animaPap.length);
-			var arr= new Array();
-			for(var i= 0; i< 4; i++){
-				console.log(animaPap[i]);
-				//arr.push(animaPap[i].clone());
-			}
-			// console.log('holi');
-			//console.log(arr);
-		//--------
 
+
+		Fin();
 		document.addEventListener('keydown', onKeyDown);
 		document.addEventListener('keyup', onKeyUp);		
 	});
@@ -710,7 +641,6 @@
 
 	
 	function render() {
-		//onWindowResize();
 		ren =  requestAnimationFrame(render);
 		deltaTime = clock.getDelta();
 		delay += 10 * deltaTime;
@@ -743,132 +673,67 @@
 		var yaw = 0;
 		var forward = 0;	
 
-	//Mnie();
-	
-	//ANIMACION camaras	
-		//animaPap[recorPap].position.z = -70;
-		// posPap += 0.5;
 
-		// if (delay2 > 1) {
-		// 	if (recorPap != 8) {
-		// 		animaPap[7].position.z = 100;
-		// 	}
-		// 	animaPap[recorPap].position.z = posPap;					
+		AnimPrinc();
+		clone();
+		DrawPaparazzis();
+		AnimPaparazzis();
+		for (var i = 0; i< paparazzis.length; i++) {
 
-		// 	if (recorPap > 0) {
-		// 		animaPap[recorPap - 1].position.z = 100;
-		// 	}
-		// 	else{				
-		// 		//animaPap[0].position.z = 100;
-		// 	}
+			paparazzis[i][paparazzis[i].currentAnim].position.z = paparazzis[i].posZ + (20 * deltaTime);
+			paparazzis[i].posZ = paparazzis[i][paparazzis[i].currentAnim].position.z;
 
-		// 	recorPap += 1;
-		// 	if (recorPap==8) {
-		// 		recorPap = 0;
-		// 	}	
-
-		// 	delay2 = 0;
-		// }	
-		// if (posPap == 10) {
-		// 	posPap = -75;
-		// }			
-
-		// animaPap[recorPap].position.x = 5;
-
-		// for (var i = 0 ; i < 5; i++) {
-		// 	// i = animaPap[recorPap].clone();
-		// 	// i.position.x = posNotas[i];
-		// 	// scene.add(i);
-		// }
-
-	//MostrarClon();
-	
-	//---KAREN
-		// DrawPaparazzis();
-		// for (var i = 0; i< paparazzis.length; i++) {
-		// 	paparazzis[i][0].position.z += 1.5 * deltaTime;
-		// }
-
-	//-------------
-
-	// ANIMACION MONO	
-		var per = animaPer.length;
-		if (delay > 1) {
-			if (recorPer != 8) {
-				animaPer[7].position.z = 100;
-
+			if (paparazzis[i][paparazzis[i].currentAnim].position.z > 20) {
+				scene.remove(paparazzis[i][paparazzis[i].currentAnim]);
 			}
-			animaPer[recorPer].position.z = -5;					
+		}
 
-			if (recorPer > 0) {
-				animaPer[recorPer - 1].position.z = 100;
-			}
-			else{				
-				//animaPer[0].position.z = 100;
-			}
 
-			recorPer += 1;
-			if (recorPer==8) {
-				recorPer = 0;
-			}	
-
-			delay = 0;
-		}	
-
-		objetoAct = animaPer[recorPer];		
 	
 	//MOVIMIENTO MONO	
-		animaPer[recorPer].position.x = 0;
+
+		animaPer[animaPer.currentAnim].position.x= animaPer.PosX;
 		
 		//37 39
 		if(keys['A']){
-			console.log("izq");
-            animaPer[recorPer].position.x = -5;
+            animaPer[animaPer.currentAnim].position.x= -5;
+            animaPer.PosX= -5;
 		}
 		else if (keys['D']) {
-			console.log("der");
-			animaPer[recorPer].position.x = 5;
+			animaPer[animaPer.currentAnim].position.x= 5;
+            animaPer.PosX= 5;
+		}
+		else if (keys['S']) {
+			animaPer[animaPer.currentAnim].position.x= 0;
+            animaPer.PosX= 0;
 		}
 
-	
-		objetoAct.rays = [new THREE.Vector3(0,0,-1),new THREE.Vector3(0,0,1)];
+		for(var i = 0; i < paparazzis.length; i++){
 
-		for(var i = 0; i < objetoAct.rays.length; i++){
+		
+			if (((paparazzis[i].posZ > -6 && paparazzis[i].posZ < -4) && 0 == paparazzis[i].posCol1.x)  || 
+				((paparazzis[i].posZ > -6 && paparazzis[i].posZ < -4)  && -5 == paparazzis[i].posCol2.x) ||
+				((paparazzis[i].posZ > -6 && paparazzis[i].posZ < -4)  && 5 == paparazzis[i].posCol3.x)) {
 
-			rayCaster.set(objetoAct.position, objetoAct.rays[i]);
-			var collision = rayCaster.intersectObjects(collisionObjects,true);
-			
-			if(collision.length > 0 && collision[0].distance < 1){
-				//var minimini = collision[0].object.parent;
-				console.log('choco minivan');
-				// for (var j = 0; j < collisionObjectsNames.length; j++) {
-				// 	var obj = scene.getObjectByName(collisionObjectsNames[j]);
-				// 	if (collision[0].object.parent.name == obj.name) {
-				// 		scene.remove(obj);
-				// 		var pos = collisionObjects.indexOf(obj);
-				// 		collisionObjects.splice(pos, 1);
-				// 		pos = collisionObjectsNames.indexOf(obj.name);
-				// 		collisionObjectsNames.splice(pos, 1);
-				// 	}
-				// }
+				puntaje += 5;
+
+				$('#score').empty();
+				$('#score').text(puntaje);
 			}
-		}		
+		}	
 
 		camera.rotation.y += yaw * deltaTime;
 		camera.translateZ(forward * deltaTime);
-		
-	for(var i = 0; i<1000; i++){
-		var dx, dy, dz;
-		dx = Math.random() * 2 - 1;
-		dY = Math.random() * 2 - 1;
-		dZ = Math.random() * 2 - 1;
+	
+	// 
 
-		geometryPL.vertices[i].add(new THREE.Vector3(dx, dy, dz));
-	}
-	geometryPL.verticesNeedUpdate = true;
+	particles.rotation.y -= 0.004;
+	particles.position.y = 100;
+	particles.position.x = 0;
+	particles.position.z = 0;
 			
 	
-		renderer.render(scene, camera);
+	renderer.render(scene, camera);
 	}
 
 	function setupScene() {		
@@ -876,14 +741,14 @@
 
 		clock = new THREE.Clock();	
 		clockP= new THREE.Clock();	
-		clockJuego= new THREE.Clock();
+		clockAnim= new THREE.Clock();
+		clockPrinc= new THREE.Clock();
 		scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera(75, visibleSize.width / visibleSize.height, 0.1, 100);
 		camera.position.z = 1;
 		camera.position.y = 20;
 		camera.rotation.x = THREE.Math.degToRad(-45);
 
-		//arreglo de vectores para rayos, y apuntan los rayos a donde va a colisionar
 		camera.rays=[
 			new THREE.Vector3(1,0,0),
 			new THREE.Vector3(-1,0,0),
@@ -916,17 +781,6 @@
 		spotii.shadow.camera.far = 100;
 		//scene.add(spotii);
 
-		for(var i=0; i <1000; i++){
-			xp = (Math.random() * 200) - 100;
-			yp = (Math.random() * 100) - 50;
-			zp = (Math.random() * 100) - 50;
-
-			geometryPL.vertices.push(new THREE.Vector3(xp, yp, zp));
-		}
-		var ParticulasPL = new THREE.Points(geometryPL, materialPL);
-		ParticulasPL.name = "luciernagas";
-		scene.add(ParticulasPL);
-
 		$("#scene-section").append(renderer.domElement);
 		window.addEventListener( 'resize', onWindowResize, false );
 	}
@@ -938,24 +792,27 @@
 	    render();
 	}
 
-	function Clonar(indice){
-		clon[indice] = animaPap[indice].clone();
-	}
-	var tamanio = notasPower.length;
 
-	function MostrarClon(){		
-		setTimeout(function(){ 
-			if (animaPapClone.length < tamanio) {
-				for(var i = 0; i < 4; i++){
-					Clonar(i);
-				}
-				
-				animaPapClone.push(clon);
-				clon = [];
-				//console.log(animaPapClone);
-			}
-		}, 
-		500);
+	function drawParticles(){
+	    particles = new THREE.Group();
+	    scene.add(particles);
+	    
+	    //const geometry = new THREE.TetrahedronGeometry(5, 0);
+	    const geometry = new THREE.SphereGeometry(0.3, 5,5);
+	    const material = new THREE.MeshPhongMaterial({
+	        color: 'rgba(209,104,204,0.5)',
+	        shading : THREE.FlatShading
+	    });
+	    
+	    for (let i = 0; i < 2000; i++){
+	        const mesh = new THREE.Mesh(geometry, material);
+	        mesh.position.z = ( Math.random() - 0.5 ) * 200;
+	        mesh.position.x = ( Math.random() - 0.5 ) * 200;
+	        mesh.position.y = ( Math.random() - 0.5 ) * 200;
+	        mesh.updateMatrix();
+	        mesh.matrixAutoUpdate = false;
+	        particles.add(mesh);
+	    }
 	}
 
 	function Mnie(){
@@ -969,26 +826,51 @@
 		// }
 	}
 
+	function AnimPrinc(){
+		tPrinc += clockPrinc.getDelta();
+
+		if(tPrinc >= .1){
+			scene.remove(animaPer[animaPer.currentAnim]);
+			animaPer.currentAnim= animaPer.currentAnim + 1 == animaPer.length ? 0 : animaPer.currentAnim +1;
+			animaPer[animaPer.currentAnim].position.x= animaPer.PosX;
+			animaPer[animaPer.currentAnim].position.z= -5;
+			scene.add(animaPer[animaPer.currentAnim]);
+			tPrinc=0;
+		}
+	}
+
+	function clone(){
+		if(paparazzis.length == 0){
+			for(var i= 0; i<8; i++){
+				var arr= new Array();
+				for(var j= 0; j< animaPap.length; j++){
+					arr[j]= animaPap[j].clone();
+					collisionObjects.push(arr[j]);
+				}
+				paparazzis[i]= arr;
+				paparazzis[i].currentAnim= 0;
+				paparazzis[i].posZ= -70;
+				paparazzis[i].posCol1 = new THREE.Vector3(0,0,-5);
+				paparazzis[i].posCol2 = new THREE.Vector3(-5,0,-5);
+				paparazzis[i].posCol3 = new THREE.Vector3(5,0,-5);
+			}
+			console.log(paparazzis);
+		}
+	}
+
 	function DrawPaparazzis(){
 		
 		timeJuego += time;
 		time += clockP.getDelta();
 
-		if(timeJuego < (60*15)){
-			third= 3;
-		} else if(timeJuego >= (60*15) && timeJuego <= (60*30)){
-			third=2.5;
-		} else if(timeJuego >= (60*31) && timeJuego <= (60*45)){
-			third=2;
-		} else if(timeJuego >= (60*46) && timeJuego <= (60*60)){
-			third=1.5;
-		} 
-		else if(timeJuego > (60*60)){
+		if(timeJuego < (600)){
+			third= 4;
+		} else if(timeJuego >= (600) && timeJuego <= (850)){
+			third=3;
+		}
+		else if(timeJuego > (850)){
 			third=1;
 		}
-
-		//third
-
 
 		if(time >= third){
 
@@ -998,17 +880,53 @@
 			if(contNP == notasPower.length){
 				contNP= 0;
 			}
-			paparazzis[contPp][0].position.z= posZ[contPp];
+			paparazzis[contPp][0].position.z= -70;
 			paparazzis[contPp][0].position.x= notasPower[contNP];
+
+			paparazzis[contPp].currentAnim= 0;
+			paparazzis[contPp].posZ= -70;
+			paparazzis[contPp].posX= notasPower[contNP];
 
 			scene.add(paparazzis[contPp][0]);
 
-			console.log(paparazzis[contPp][0]);
-			console.log(contPp);
 			contPp+=1;
-			contNP+=6;
+			contNP+=third;
 
 			time=0;
 		}
 	}
+
+	function AnimPaparazzis(){
+		tAnim += clockAnim.getDelta();
+
+		if(tAnim >= .1){
+			for (var i = 0; i< paparazzis.length; i++) {
+				
+				scene.remove(paparazzis[i][paparazzis[i].currentAnim]);
+				paparazzis[i].currentAnim= paparazzis[i].currentAnim + 1 == animaPap.length ? 0 : paparazzis[i].currentAnim + 1;
+				paparazzis[i][paparazzis[i].currentAnim].position.z = paparazzis[i].posZ;
+				paparazzis[i][paparazzis[i].currentAnim].position.x = paparazzis[i].posX;
+				scene.add(paparazzis[i][paparazzis[i].currentAnim]);			
+			}
+
+			tAnim=0;
+		}
+	}
+
+
+	function Fin(){
+		setTimeout(function() {
+			cancelAnimationFrame(ren);
+			mov = 0;
+			 	
+		 	if (audio.paused == false) {
+	            audio.pause();
+	        }
+	         $("#menu2").removeClass('elem-hide');
+	         $('#puntaje_final').text($('#score').text());
+	        //msgGameOve.iziModal('open');
+		},95000);
+		
+	}
+
 
